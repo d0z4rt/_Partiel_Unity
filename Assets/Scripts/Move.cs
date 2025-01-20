@@ -1,17 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    public float speed = 0;
+    [SerializeField] public float speed = 1;
     public LayerMask layerOrb;
 
     void Update()
     {
-        Vector3 deltaPosition = speed * Time.deltaTime * new Vector3(Input.GetAxis("Vertical"), 0, Input.GetAxis("Horizontal"));
+        Vector3 deltaPosition = speed * Time.deltaTime * new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        transform.position += deltaPosition;
+        transform.Translate(deltaPosition);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +20,9 @@ public class Move : MonoBehaviour
             Destroy(other.gameObject);
             GameManager.instance.AddScore();
         }
-
+        if (other.CompareTag("Ghost"))
+        {
+            GameManager.instance.Exit();
+        }
     }
 }

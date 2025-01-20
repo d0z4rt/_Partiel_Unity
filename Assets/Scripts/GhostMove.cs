@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,7 +8,7 @@ public class GhostMove : MonoBehaviour
 
     private NavMeshAgent agent;
 
-    void OnGameStart()
+    void Start()
     {
         agent = GetComponent<NavMeshAgent>();
     }
